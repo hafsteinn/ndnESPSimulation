@@ -1,0 +1,54 @@
+# topo-grid-3x3.txt
+
+#   /--------\	    /-\	        /-\
+#   |Consumer|<---->| |<------->| |
+#   \--------/	    \-/	        \-/
+#       ^   	     ^ 	         ^
+#       |            |           |   1Mbps/10ms delay
+#       v            v           v
+#      /-\          /-\         /-\
+#      | |<-------->| |<------->| |
+#      \-/          \-/         \-/
+#       ^   	     ^ 	         ^
+#       |            |           |
+#       v            v           v
+#      /-\	    /-\	     /--------\
+#      | |<-------->| |<---->|Producer|
+#      \-/          \-/      \--------/
+
+# any empty lines and lines starting with '#' symbol is ignored
+#
+# The file should contain exactly two sections: router and link, each starting with the corresponding keyword
+#
+# router section defines topology nodes and their relative positions (e.g., to use in visualizer)
+router
+
+# each line in this section represents one router and should have the following data
+# node  comment     yPos    xPos
+Primary   NA  3   1
+Consumer1   NA  3   2
+ESP NA  3   3
+Consumer2   NA  2   1
+AP  NA  2   2
+Consumer3   NA  2   3
+Producer    NA  1   1
+                   
+# Note that `node` can be any string. It is possible to access to the node by name using Names::Find, see examples.
+
+# link section defines point-to-point links between nodes and characteristics of these links
+link
+
+# Each line should be in the following format (only first two are required, the rest can be omitted)
+# srcNode   dstNode     bandwidth   metric  delay   queue
+# bandwidth: link bandwidth
+# metric: routing metric
+# delay:  link delay
+# queue:  MaxPackets for transmission queue on the link (both directions)
+Consumer1       AP       1Mbps       1       1ms    100
+Consumer2       AP       1Mbps       1       1ms    100
+Consumer3       AP       1Mbps       1       1ms    100
+Primary       AP       1Mbps       1       1ms    100
+Producer       AP       1Mbps       1       1ms    100
+ESP       AP       1Mbps       1       1ms    100
+
+
